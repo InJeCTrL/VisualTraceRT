@@ -1,0 +1,15 @@
+D:\Code Trunk\CSharp\VisualTraceRT\VisualTraceRT\VisualTraceRT\bin\Debug\VisualTraceRT.exe.config
+D:\Code Trunk\CSharp\VisualTraceRT\VisualTraceRT\VisualTraceRT\bin\Debug\VisualTraceRT.exe
+D:\Code Trunk\CSharp\VisualTraceRT\VisualTraceRT\VisualTraceRT\bin\Debug\VisualTraceRT.pdb
+D:\Code Trunk\CSharp\VisualTraceRT\VisualTraceRT\VisualTraceRT\obj\Debug\VisualTraceRT.csprojAssemblyReference.cache
+D:\Code Trunk\CSharp\VisualTraceRT\VisualTraceRT\VisualTraceRT\obj\Debug\MainWindow.g.cs
+D:\Code Trunk\CSharp\VisualTraceRT\VisualTraceRT\VisualTraceRT\obj\Debug\App.g.cs
+D:\Code Trunk\CSharp\VisualTraceRT\VisualTraceRT\VisualTraceRT\obj\Debug\VisualTraceRT_MarkupCompile.cache
+D:\Code Trunk\CSharp\VisualTraceRT\VisualTraceRT\VisualTraceRT\obj\Debug\VisualTraceRT_MarkupCompile.lref
+D:\Code Trunk\CSharp\VisualTraceRT\VisualTraceRT\VisualTraceRT\obj\Debug\MainWindow.baml
+D:\Code Trunk\CSharp\VisualTraceRT\VisualTraceRT\VisualTraceRT\obj\Debug\VisualTraceRT.g.resources
+D:\Code Trunk\CSharp\VisualTraceRT\VisualTraceRT\VisualTraceRT\obj\Debug\VisualTraceRT.Properties.Resources.resources
+D:\Code Trunk\CSharp\VisualTraceRT\VisualTraceRT\VisualTraceRT\obj\Debug\VisualTraceRT.csproj.GenerateResource.cache
+D:\Code Trunk\CSharp\VisualTraceRT\VisualTraceRT\VisualTraceRT\obj\Debug\VisualTraceRT.csproj.CoreCompileInputs.cache
+D:\Code Trunk\CSharp\VisualTraceRT\VisualTraceRT\VisualTraceRT\obj\Debug\VisualTraceRT.exe
+D:\Code Trunk\CSharp\VisualTraceRT\VisualTraceRT\VisualTraceRT\obj\Debug\VisualTraceRT.pdb

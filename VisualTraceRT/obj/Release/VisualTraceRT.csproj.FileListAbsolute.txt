@@ -1,0 +1,15 @@
+D:\Code Trunk\CSharp\VisualTraceRT\VisualTraceRT\VisualTraceRT\bin\Release\VisualTraceRT.exe.config
+D:\Code Trunk\CSharp\VisualTraceRT\VisualTraceRT\VisualTraceRT\bin\Release\VisualTraceRT.exe
+D:\Code Trunk\CSharp\VisualTraceRT\VisualTraceRT\VisualTraceRT\bin\Release\VisualTraceRT.pdb
+D:\Code Trunk\CSharp\VisualTraceRT\VisualTraceRT\VisualTraceRT\obj\Release\VisualTraceRT.csprojAssemblyReference.cache
+D:\Code Trunk\CSharp\VisualTraceRT\VisualTraceRT\VisualTraceRT\obj\Release\MainWindow.g.cs
+D:\Code Trunk\CSharp\VisualTraceRT\VisualTraceRT\VisualTraceRT\obj\Release\App.g.cs
+D:\Code Trunk\CSharp\VisualTraceRT\VisualTraceRT\VisualTraceRT\obj\Release\VisualTraceRT_MarkupCompile.cache
+D:\Code Trunk\CSharp\VisualTraceRT\VisualTraceRT\VisualTraceRT\obj\Release\VisualTraceRT_MarkupCompile.lref
+D:\Code Trunk\CSharp\VisualTraceRT\VisualTraceRT\VisualTraceRT\obj\Release\MainWindow.baml
+D:\Code Trunk\CSharp\VisualTraceRT\VisualTraceRT\VisualTraceRT\obj\Release\VisualTraceRT.g.resources
+D:\Code Trunk\CSharp\VisualTraceRT\VisualTraceRT\VisualTraceRT\obj\Release\VisualTraceRT.Properties.Resources.resources
+D:\Code Trunk\CSharp\VisualTraceRT\VisualTraceRT\VisualTraceRT\obj\Release\VisualTraceRT.csproj.GenerateResource.cache
+D:\Code Trunk\CSharp\VisualTraceRT\VisualTraceRT\VisualTraceRT\obj\Release\VisualTraceRT.csproj.CoreCompileInputs.cache
+D:\Code Trunk\CSharp\VisualTraceRT\VisualTraceRT\VisualTraceRT\obj\Release\VisualTraceRT.exe
+D:\Code Trunk\CSharp\VisualTraceRT\VisualTraceRT\VisualTraceRT\obj\Release\VisualTraceRT.pdb
