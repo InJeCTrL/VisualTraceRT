@@ -6,7 +6,7 @@ IP解析: [ip-api.com](http://ip-api.com)
 
 地图SDK: [高德地图](https://lbs.amap.com/)
 
-------
+---
 
 界面样式
 
@@ -14,9 +14,9 @@ IP解析: [ip-api.com](http://ip-api.com)
 
 下载地址：
 
-### [VisualTraceRT](./VisualTraceRT.rar)
+### [VisualTraceRT](https://injectrl.github.io/VisualTraceRT/VisualTraceRT.rar)
 
-------
+---
 
 更新日志：
 
