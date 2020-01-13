@@ -14,13 +14,15 @@ IP解析: [ip-api.com](http://ip-api.com)
 
 下载地址：
 
-### [VisualTraceRT](https://injectrl.github.io/VisualTraceRT/VisualTraceRT.rar)
+### [VisualTraceRT](https://injectrl.github.io/VisualTraceRT/VisualTraceRT.exe)
 
 ---
 
 更新日志：
 
-
+- 1.1
+	1.修正部分描述
+	2.完善版本号
 
 - 1.0
 

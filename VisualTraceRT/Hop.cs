@@ -34,7 +34,7 @@ namespace VisualTraceRT
         /// <summary>
         /// 来源
         /// </summary>
-        public string Origin { get; set; }
+        public string Org { get; set; }
         /// <summary>
         /// 时延
         /// </summary>

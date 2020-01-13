@@ -58,6 +58,7 @@ namespace VisualTraceRT
                 node.Geo += " " + sr.ReadLine();
                 // 设置地理位置(城市名称)
                 node.Geo += " " + sr.ReadLine();
+                // 邮政编码
                 sr.ReadLine();
                 // 设置纬度
                 node.Lat = sr.ReadLine();
@@ -67,8 +68,8 @@ namespace VisualTraceRT
                 sr.ReadLine();
                 // 设置互联网服务提供商
                 node.ISP = sr.ReadLine();
-                // 设置来源
-                node.Origin = sr.ReadLine();
+                // 设置组织机构
+                node.Org = sr.ReadLine();
                 // 设置自治系统
                 node.AS = sr.ReadLine();
             }
