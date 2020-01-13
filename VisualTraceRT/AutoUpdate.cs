@@ -14,7 +14,7 @@ namespace VisualTraceRT
         /// <summary>
         /// 当前版本号
         /// </summary>
-        private const double nowVersion = 1.1;
+        private const double nowVersion = 1.2;
         /// <summary>
         /// 当前程序绝对路径
         /// </summary>
@@ -77,8 +77,6 @@ namespace VisualTraceRT
                 // 更新完成后第一次启动新版本程序, 执行旧版本清理
                 else if (latestVersion == nowVersion && Updated == 1)
                 {
-                    if (Process.GetProcessById(oldPID).HasExited == false)
-                        Process.GetProcessById(oldPID).Kill();
                     File.Delete(oldPath);
                     MessageBox.Show("已经更新到最新版本", "自动升级");
                 }
@@ -87,9 +85,9 @@ namespace VisualTraceRT
                 s.Dispose();
                 s.Close();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                MessageBox.Show("无法检测版本状态", "自动升级");
+                MessageBox.Show("无法检测版本状态\n" + e.Message, "自动升级");
             }
         }
         /// <summary>
@@ -125,8 +123,9 @@ namespace VisualTraceRT
             Process p = new Process();
             p.StartInfo.FileName = newPath;
             // 设置更新后第一次启动参数
-            p.StartInfo.Arguments = "1 " + Process.GetCurrentProcess().Id.ToString() + " " + nowPath;
+            p.StartInfo.Arguments = "1 " + Process.GetCurrentProcess().Id.ToString() + " \"" + nowPath + "\"";
             p.StartInfo.UseShellExecute = false;
+            p.Start();
             Environment.Exit(0);
         }
     }

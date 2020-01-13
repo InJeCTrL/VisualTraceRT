@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VisualTraceRT"
         mc:Ignorable="d"
-        Title="VisualTraceRT" Height="724.5" Width="927.5" WindowStartupLocation="CenterScreen">
+        Title="VisualTraceRT 1.2" Height="724.5" Width="927.5" WindowStartupLocation="CenterScreen">
     <Grid>
         <DataGrid x:Name="TraceGrid" Margin="10,77,10,0" AutoGenerateColumns="False" CanUserAddRows="True" CanUserSortColumns="False" IsReadOnly="True" Height="245" VerticalAlignment="Top">
             <DataGrid.Columns>
