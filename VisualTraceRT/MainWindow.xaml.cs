@@ -33,7 +33,17 @@ namespace VisualTraceRT
             InitializeComponent();
             ReadCMDLine += new NewCMDLine(ReadCMDLineAction);
             EndCMD += new NoMoreCMD(EndCMDAction);
+            traceMap.LoadCompleted += TraceMap_LoadCompleted;
             ShowMap();
+        }
+        /// <summary>
+        /// 地图初始化后允许tracert
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TraceMap_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
+            Trace.IsEnabled = true;
         }
         /// <summary>
         /// 初始化显示地图
