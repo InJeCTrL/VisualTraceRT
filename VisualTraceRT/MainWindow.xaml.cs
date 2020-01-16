@@ -33,6 +33,72 @@ namespace VisualTraceRT
             InitializeComponent();
             ReadCMDLine += new NewCMDLine(ReadCMDLineAction);
             EndCMD += new NoMoreCMD(EndCMDAction);
+            ShowMap();
+        }
+        /// <summary>
+        /// 初始化显示地图
+        /// </summary>
+        private void ShowMap()
+        {
+            // 地图页面
+            string str_MapInside = @"<!doctype html>
+                                        <html lang='en'>
+                                        <head>
+                                            <meta charset='utf-8'>
+                                            <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+                                            <meta name='viewport' content='initial-scale=1.0, user-scalable=no, width=device-width'>
+                                            <style>
+                                                html,
+                                                body,
+                                                #container {
+                                                    width: 100%;
+                                                    height: 100%;
+                                                }
+                                            </style>
+                                        </head>
+                                        <body scroll='no'>
+                                            <div id='container' class='map' tabindex='0'></div>
+                                            <script src='https://webapi.amap.com/maps?v=1.4.15&key=259c97b0e4e74d590717244ccc7d8619'></script>
+                                            <script type='text/javascript'>
+                                                var map = new AMap.Map('container');
+                                                var traceroute = [];
+                                                // 清除地图
+                                                function MapClear()
+                                                {
+                                                    traceroute = [];
+                                                    map.clearMap();
+                                                }
+                                                // 添加新路由节点
+                                                function AddNode(Longitude, Latitude)
+                                                {
+                                                    traceroute.push([Longitude, Latitude]);
+                                                }
+                                                // 显示路由路径
+                                                function ShowRoute()
+                                                {
+                                                    for (var i = 0; i < traceroute.length; i++) {
+                                                        new AMap.Marker({
+                                                            map: map,
+                                                            position: traceroute[i]
+                                                        });
+                                                    }
+                                                    var polyline = new AMap.Polyline({
+                                                        path: traceroute,
+                                                        showDir: true,
+                                                        strokeColor: '#FF0000',
+                                                        strokeWeight: 8,
+                                                        lineJoin: 'round',
+                                                        lineCap: 'round'
+                                                    });
+
+                                                    map.add([polyline]);
+                                                    map.setFitView();
+                                                }
+                                            </script>
+                                        </body>
+                                        </html>";
+            // 显示地图
+            this.traceMap.NavigateToString(str_MapInside);
         }
         /// <summary>
         /// 获取单跳的详细数据
@@ -157,6 +223,11 @@ namespace VisualTraceRT
                 SetHopDetails(newHop);
                 HopList.Add(newHop);
                 TraceGrid.ItemsSource = HopList;
+                if (newHop.Lon != null &&
+                    newHop.Lat != null)
+                {
+                    traceMap.InvokeScript("AddNode", new object[] { newHop.Lon, newHop.Lat });
+                }
             }
         }
         /// <summary>
@@ -165,59 +236,8 @@ namespace VisualTraceRT
         /// <param name="e"></param>
         private void EndCMDAction(EventArgs e)
         {
-            // 地图页面
-            string str_MapInside = @"<!doctype html>
-                                        <html lang='en'>
-                                          <head>
-                                            <meta charset='utf-8'>
-                                            <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-                                            <meta name='viewport' content='initial-scale=1.0, user-scalable=no, width=device-width'>
-                                            <style>
-                                            html,
-                                            body,
-                                            #container {
-                                              width: 100%;
-                                              height: 100%;
-                                            }
-                                            </style>
-                                          </head>
-                                          <body scroll='no'>
-                                            <div id='container' class='map' tabindex='0'></div>
-                                            <script src='https://webapi.amap.com/maps?v=1.4.15&key=259c97b0e4e74d590717244ccc7d8619'></script>
-                                            <script type='text/javascript'>
-                                            var map = new AMap.Map('container');
-                                            var traceroute = [";
-        foreach (var node in HopList)
-        {
-            if (node.Lat != null &&
-                node.Lon != null)
-            str_MapInside += "[" + node.Lon + ", " + node.Lat + "],";
-        }
-        str_MapInside +=
-                                            @"];
-                                            for (var i = 0; i < traceroute.length; i++) {
-                                                new AMap.Marker({
-                                                    map: map,
-                                                    position: traceroute[i]
-                                                });
-                                            }
-                                            var polyline = new AMap.Polyline({
-                                                path: traceroute,
-                                                showDir: true,
-                                                strokeColor: '#FF0000',
-                                                strokeWeight: 8,
-      	                                        lineJoin: 'round',
-      	                                        lineCap: 'round'
-                                            });
-
-                                            map.add([polyline])
-                                            map.setFitView()
-                                            </script>
-                                        </body>
-                                        </html>
-                                        ";
-            // 显示地图
-            this.traceMap.NavigateToString(str_MapInside);
+            // 显示路由路径
+            traceMap.InvokeScript("ShowRoute");
             Trace.Content = "TraceRT";
             Trace.IsEnabled = true;
         }
@@ -230,6 +250,8 @@ namespace VisualTraceRT
         {
             Trace.IsEnabled = false;
             Trace.Content = "Tracing...";
+            // 清除地图覆盖物
+            traceMap.InvokeScript("MapClear");
             HopList.Clear();
             TraceByCMD(targetIP.Text);
         }

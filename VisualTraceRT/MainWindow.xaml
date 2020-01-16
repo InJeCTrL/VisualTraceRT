@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VisualTraceRT"
         mc:Ignorable="d"
-        Title="VisualTraceRT 1.3" Height="724.5" Width="927.5" WindowStartupLocation="CenterScreen">
+        Title="VisualTraceRT 1.4" Height="724.5" Width="927.5" WindowStartupLocation="CenterScreen">
     <Grid>
         <DataGrid x:Name="TraceGrid" Margin="10,77,10,0" AutoGenerateColumns="False" CanUserAddRows="True" CanUserSortColumns="False" IsReadOnly="True" Height="245" VerticalAlignment="Top">
             <DataGrid.Columns>
@@ -19,7 +19,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="Trace" Content="TraceRT" Height="62" Margin="598,10,10,0" VerticalAlignment="Top" Click="Button_Click" IsDefault="True"/>
-        <TextBox x:Name="targetIP" HorizontalAlignment="Left" Height="40" Margin="25,24,0,0" TextWrapping="Wrap" Text="docs.microsoft.com" VerticalAlignment="Top" Width="547" FontSize="18" ToolTip="IP / Domain Here"/>
+        <TextBox x:Name="targetIP" HorizontalAlignment="Left" Height="40" Margin="25,24,0,0" TextWrapping="Wrap" Text="docs.microsoft.com" VerticalAlignment="Top" Width="547" FontSize="18" ToolTip="IP / Domain Here" VerticalContentAlignment="Center"/>
         <WebBrowser x:Name="traceMap" Margin="10,0,10,10" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" Height="351" VerticalAlignment="Bottom" OpacityMask="#FF2B2828"/>
     </Grid>
 </Window>
