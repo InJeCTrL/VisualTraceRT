@@ -14,7 +14,7 @@ namespace VisualTraceRT
         /// <summary>
         /// 当前版本号
         /// </summary>
-        private const double nowVersion = 1.5;
+        private const double nowVersion = 1.6;
         /// <summary>
         /// 当前程序绝对路径
         /// </summary>

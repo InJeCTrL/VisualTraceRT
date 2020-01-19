@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Windows;
 
 namespace VisualTraceRT
@@ -25,6 +26,14 @@ namespace VisualTraceRT
         public event NewCMDLine ReadCMDLine;
         public event NoMoreCMD EndCMD;
         /// <summary>
+        /// Ping-tracert使用的目标IP(可能由域名转换而来)
+        /// </summary>
+        private string DestIP;
+        /// <summary>
+        /// Ping-tracert使用的当前距离
+        /// </summary>
+        private int nowDist;
+        /// <summary>
         /// 绑定到DataGrid的数据列表
         /// </summary>
         private ObservableCollection<Hop> HopList = new ObservableCollection<Hop>();
@@ -32,7 +41,7 @@ namespace VisualTraceRT
         {
             InitializeComponent();
             ReadCMDLine += new NewCMDLine(ReadCMDLineAction);
-            EndCMD += new NoMoreCMD(EndCMDAction);
+            EndCMD += new NoMoreCMD(EndTraceRT);
             traceMap.LoadCompleted += TraceMap_LoadCompleted;
             ShowMap();
         }
@@ -157,7 +166,7 @@ namespace VisualTraceRT
         /// <summary>
         /// 命令行调用tracert
         /// </summary>
-        /// <param name="IP"></param>
+        /// <param name="IP">目标主机IP地址或域名</param>
         private void TraceByCMD(string IP)
         {
             Process p = new Process();
@@ -173,6 +182,67 @@ namespace VisualTraceRT
             p.EnableRaisingEvents = true;
             p.Start();
             p.BeginOutputReadLine();
+        }
+        /// <summary>
+        /// 调用Ping(ICMP包)实现tracert
+        /// </summary>
+        /// <param name="IP">目标主机IP地址或域名</param>
+        private void TraceByPing(string IP)
+        {
+            Ping ping = new Ping();
+            try
+            {
+                PingReply pingReply = ping.Send(IP);
+                DestIP = pingReply.Address.ToString();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("无法Ping通指定主机", "VisualTraceRT");
+                EndTraceRT(null);
+                return;
+            }
+            // 开始tracert
+            PingOptions options = new PingOptions(nowDist, true);
+            ping.PingCompleted += Ping_PingCompleted;
+            byte[] buf = new byte[256];
+            ping.SendAsync(IP, 1000, buf, options, null);
+        }
+        /// <summary>
+        /// 单次异步Ping完成事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Ping_PingCompleted(object sender, PingCompletedEventArgs e)
+        {
+            // 实例化新节点
+            Hop newHop = new Hop();
+            newHop.Distance = nowDist.ToString();
+            newHop.IP = e.Reply.Address.ToString();
+            newHop.Delay = e.Reply.RoundtripTime.ToString();
+            SetHopDetails(newHop);
+            HopList.Add(newHop);
+            // 设置列表显示
+            TraceGrid.ItemsSource = HopList;
+            // 地图页面新增节点数据
+            if (newHop.Lon != null &&
+                newHop.Lat != null)
+            {
+                traceMap.InvokeScript("AddNode", new object[] { newHop.Lon, newHop.Lat });
+            }
+            // 尚未跟踪到目标主机
+            if (e.Reply.Address.ToString().Equals(DestIP) != true)
+            {
+                ++nowDist;
+                Ping ping = new Ping();
+                PingOptions options = new PingOptions(nowDist, true);
+                ping.PingCompleted += Ping_PingCompleted;
+                byte[] buf = new byte[256];
+                ping.SendAsync(DestIP, 1000, buf, options, null);
+            }
+            else
+            {
+                EndTraceRT(null);
+            }
         }
         /// <summary>
         /// 捕获到命令运行结束
@@ -244,7 +314,7 @@ namespace VisualTraceRT
         /// 命令运行结束后动作
         /// </summary>
         /// <param name="e"></param>
-        private void EndCMDAction(EventArgs e)
+        private void EndTraceRT(EventArgs e)
         {
             // 显示路由路径
             traceMap.InvokeScript("ShowRoute");
@@ -263,7 +333,18 @@ namespace VisualTraceRT
             // 清除地图覆盖物
             traceMap.InvokeScript("MapClear");
             HopList.Clear();
-            TraceByCMD(targetIP.Text);
+            // 使用Windows自带tracert
+            if (IsCMD.IsChecked == true)
+            {
+                TraceByCMD(targetIP.Text);
+            }
+            // 使用Ping实现的tracert
+            else
+            {
+                // 路径计数归零
+                nowDist = 1;
+                TraceByPing(targetIP.Text);
+            }
         }
     }
 }

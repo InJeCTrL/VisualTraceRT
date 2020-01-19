@@ -20,6 +20,11 @@ IP解析: [ip-api.com](http://ip-api.com)
 
 更新日志：
 
+- 1.6
+
+	1. 增加程序图标
+	2. 增加自定义Ping的TTL以实现tracert的方法
+
 - 1.5
 
 	1. 初始化地图完毕前不允许执行traceRT，避免崩溃
